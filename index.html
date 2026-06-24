@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सिद्धी साई दिंडी २०२७ - डिझिटल व्यवस्थापन</title>
+    <title>Siddhi Sai Dindi 2027 - Digital Management</title>
+    <!-- Core External Libraries for Scanner & QR Rendering -->
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
@@ -12,7 +13,7 @@
         header { background: var(--secondary); color: white; padding: 15px; font-size: 22px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         
         /* Login UI Architecture */
-        .auth-container { max-width: 400px; margin: 60px auto; padding: 25px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .auth-container { max-width: 400px; margin: 40px auto; padding: 25px; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .nav-bar { display: none; justify-content: space-around; background: #fff; border-bottom: 1px solid #ddd; }
         .nav-btn { background: none; border: none; padding: 15px 10px; font-weight: bold; color: var(--secondary); cursor: pointer; flex: 1; font-size: 14px; }
         .nav-btn.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
@@ -39,13 +40,12 @@
         .progress-container { background: #eee; border-radius: 10px; height: 24px; width: 100%; margin: 15px 0; overflow: hidden; }
         .progress-bar { background: var(--success); height: 100%; width: 0%; transition: width 0.5s ease; }
 
-        /* Exact Match ID Card Design (Front & Back Printing CSS) */
+        /* Match ID Card Design (Front & Back Printing CSS) */
         .id-card-print { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
         .id-side { width: 300px; height: 460px; border: 1px solid #bbb; border-radius: 12px; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #fff; overflow: hidden; box-sizing: border-box; }
         .id-front-bg { background: linear-gradient(180deg, #ff9933 0%, #ffe0b3 40%, #ffffff 100%); height: 100%; padding: 15px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
         
         .id-title-main { font-size: 24px; font-weight: bold; color: #cc3300; margin: 5px 0 0 0; font-family: 'Georgia', serif; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .id-subtitle-sub { font-size: 12px; color: #333; margin: 2px 0; font-weight: bold; }
         .id-location-tag { font-size: 14px; font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
         
         .id-photo-frame { width: 110px; height: 135px; border: 3px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.15); background: #fcfcfc; display: flex; align-items: center; justify-content: center; border-radius: 4px; overflow: hidden; margin-bottom: 15px; }
@@ -69,103 +69,110 @@
 
 <header>🕉️ सिद्धी साई दिंडी २०२७ (परळ, मुंबई)</header>
 
+<!-- ================= 0. AUTHENTICATION GATEWAY ================= -->
 <div id="auth-panel" class="auth-container">
-    <h2 style="border-bottom: 3px solid var(--primary);">दिंडी डिजिटल प्रवेश लॉगिन</h2>
+    <h2 style="border-bottom: 3px solid var(--primary);">Dindi Digital Portal Login</h2>
     <div class="form-group">
-        <label>वापरकर्ता भूमिका (Role)</label>
+        <label>User Role</label>
         <select id="login-role">
-            <option value="leader">ग्रुप लीडर / स्वयंसेवक (Volunteer)</option>
-            <option value="admin">मुख्य अ‍ॅडमिन कमिटी (Admin Controls)</option>
+            <option value="leader">Group Leader / Volunteer</option>
+            <option value="admin">Main Admin Committee</option>
         </select>
     </div>
     <div class="form-group">
-        <label>प्रवेश कोड (Security Password)</label>
-        <input type="password" id="login-pass" placeholder="Security PIN प्रविष्ट करा" required>
+        <label>Security Password PIN</label>
+        <input type="password" id="login-pass" placeholder="Enter PIN Code" required>
     </div>
-    <button class="btn" onclick="handleLogin()">प्रणालीमध्ये प्रवेश करा</button>
+    <button class="btn" onclick="handleLogin()">Login to System</button>
 </div>
 
+<!-- Dynamic App Navigation Bar Menu Container -->
 <div class="nav-bar" id="app-nav-bar">
-    <button class="nav-btn active" id="nav-reg" onclick="switchView('register-view', this)">📝 नोंदणी (Register)</button>
-    <button class="nav-btn" id="nav-scan" onclick="switchView('scanner-view', this); focusGunInput();">📷 स्कॅनर (Gun/Camera)</button>
-    <button class="nav-btn" id="nav-dash" onclick="switchView('dashboard-view', this); fetchDashboardData();">📊 डॅशबोर्ड (Dashboard)</button>
-    <button class="nav-btn" id="nav-card" onclick="switchView('idcard-view', this)">🪪 ओळखपत्र (ID Output)</button>
+    <button class="nav-btn active" id="nav-reg" onclick="switchView('register-view', this)">📝 Register</button>
+    <button class="nav-btn" id="nav-scan" onclick="switchView('scanner-view', this); focusGunInput();">📷 Scanner (Gun/Camera)</button>
+    <button class="nav-btn" id="nav-dash" onclick="switchView('dashboard-view', this); fetchDashboardData();">📊 Dashboard</button>
+    <button class="nav-btn" id="nav-card" onclick="switchView('idcard-view', this)">🪪 ID Output</button>
 </div>
 
+<!-- ================= 1. REGISTRATION INTERFACE ================= -->
 <div id="register-view" class="view-panel">
     <div class="card">
-        <h2>नवीन साईभक्त नोंदणी फॉर्म</h2>
+        <h2>New Devotee Registration Form</h2>
         <form id="registrationForm" onsubmit="handleRegistration(event)">
-            <div class="form-group"><label>नियुक्त क्यूआर आयडी नंबर (QR ID)</label><input type="number" id="reg-card-id" placeholder="उदा. 1001" required></div>
-            <div class="form-group"><label>साईभक्ताचे पूर्ण नाव (Full Name)</label><input type="text" id="reg-name" placeholder="नाव, वडिलांचे नाव, आडनाव" required></div>
-            <div class="form-group"><label>मोबाईल नंबर (Mobile)</label><input type="tel" id="reg-phone" placeholder="10 अंकी मोबाईल क्रमांक" pattern="[0-9]{10}" required></div>
-            <div class="form-group"><label>शाखा (Shakha)</label><input type="text" id="reg-shakha" placeholder="उदा. वरळी, परळ, प्रभादेवी" required></div>
+            <div class="form-group"><label>Assigned QR ID Number</label><input type="number" id="reg-card-id" placeholder="e.g. 1001" required></div>
+            <div class="form-group"><label>Devotee Full Name</label><input type="text" id="reg-name" placeholder="First Name, Middle Name, Last Name" required></div>
+            <div class="form-group"><label>Mobile Number(s)</label><input type="text" id="reg-phone" placeholder="e.g. 9920806163 / 8655665510" required></div>
+            <div class="form-group"><label>Shakha (Branch)</label><input type="text" id="reg-shakha" placeholder="e.g. Worli, Parel, Prabhadevi" required></div>
             <div class="form-group">
-                <label>रक्त गट (Blood Group)</label>
+                <label>Blood Group</label>
                 <select id="reg-blood"><option value="B+">B+</option><option value="A+">A+</option><option value="O+">O+</option><option value="AB+">AB+</option><option value="O-">O-</option></select>
             </div>
             <div class="form-group">
-                <label>नियुक्त दिंडी ग्रुप क्रमांक</label>
-                <select id="reg-group"><script>for(let i=1; i<=25; i++) document.write(`<option value="${i}">ग्रुप क्र. ${i}</option>`);</script></select>
+                <label>Assigned Dindi Group Number</label>
+                <select id="reg-group"><script>for(let i=1; i<=25; i++) document.write(`<option value="${i}">Group No. ${i}</option>`);</script></select>
             </div>
-            <button type="submit" class="btn">डेटा सबमिट करा आणि कार्ड लॉक करा</button>
+            <button type="submit" class="btn">Submit Data & Lock Card</button>
         </form>
     </div>
 </div>
 
+<!-- ================= 2. SCANNERS GATEWAY ================= -->
 <div id="scanner-view" class="view-panel">
     <div class="card">
-        <h2>लाईव्ह डिजिटल हजेरी ट्रॅकिंग पॅनेल</h2>
+        <h2>Live Attendance & Tracking Panel</h2>
         <div class="form-group">
-            <label>सध्याचा हजेरी थांबा (Active Tracking Station)</label>
+            <label>Current Active Station</label>
             <select id="scan-location">
-                <option value="Thane_Lunch">दिवस १: ठाणे (दुपारचे जेवण)</option>
-                <option value="Shahapur_Dinner">दिवस १: शहापूर (रात्रीचे जेवण)</option>
-                <option value="Igatpuri_Lunch">दिवस २: इगतपुरी (दुपारचे जेवण)</option>
+                <option value="Thane_Lunch">Day 1: Thane (Lunch)</option>
+                <option value="Shahapur_Dinner">Day 1: Shahapur (Dinner)</option>
+                <option value="Igatpuri_Lunch">Day 2: Igatpuri (Lunch)</option>
             </select>
         </div>
 
         <div id="gun-input-box">
-            <label style="color: var(--success); font-weight: bold;">[मोड १] हाय-स्पीड क्यूआर स्कॅनर गन (QR Gun Mode Active)</label>
-            <input type="text" id="gun-barcode-catcher" placeholder="स्कॅनर गनने ओळखपत्र स्कॅन करा (येथे क्लिक ठेवा)..." onkeypress="handleGunScan(event)">
+            <label style="color: var(--success); font-weight: bold;">[Mode 1] Hardware QR Scanner Gun (Keep Input Focused)</label>
+            <input type="text" id="gun-barcode-catcher" placeholder="Scan ID Card with gun here..." onkeypress="handleGunScan(event)">
         </div>
 
-        <button class="btn" style="background: var(--secondary); margin-bottom: 15px;" onclick="startCameraScanner()">[मोड २] मोबाईल कॅमेरा ऑन करा</button>
+        <button class="btn" style="background: var(--secondary); margin-bottom: 15px;" onclick="startCameraScanner()">[Mode 2] Turn On Mobile Camera Scanner</button>
         <div id="scanner-reader"></div>
         <div id="scan-feedback" class="scan-status"></div>
     </div>
 </div>
 
+<!-- ================= 3. ADMIN DASHBOARD ================= -->
 <div id="dashboard-view" class="view-panel">
     <div class="card">
-        <h2>मुख्य कमिटी नियंत्रण केंद्र (Admin Analytics Control)</h2>
+        <h2>Admin Management Analytics Center</h2>
         <div class="form-group">
-            <label>लाईव्ह प्रोग्रेस पाहा (थांबा फिल्टर):</label>
-            <select id="dash-location-filter" onchange="fetchDashboardData()"><option value="Thane_Lunch">दिवस १: ठाणे (दुपारचे जेवण)</option><option value="Shahapur_Dinner">दिवस १: शहापूर (रात्रीचे जेवण)</option></select>
+            <label>Filter Tracking Progress:</label>
+            <select id="dash-location-filter" onchange="fetchDashboardData()"><option value="Thane_Lunch">Day 1: Thane (Lunch)</option><option value="Shahapur_Dinner">Day 1: Shahapur (Dinner)</option></select>
         </div>
     </div>
     <div class="metrics-grid">
-        <div class="metric-card"><div class="label">एकूण नोंदणीकृत साईभक्त</div><div class="metric-num" id="dash-total-registered">0</div></div>
-        <div class="metric-card" style="border-top-color: var(--success);"><div class="label">उपस्थित साईभक्त संख्या</div><div class="metric-num" id="dash-total-scanned">0</div></div>
+        <div class="metric-card"><div class="label">Total Registered Devotees</div><div class="metric-num" id="dash-total-registered">0</div></div>
+        <div class="metric-card" style="border-top-color: var(--success);"><div class="label">Present Count</div><div class="metric-num" id="dash-total-scanned">0</div></div>
     </div>
     <div class="card">
-        <h2>एकूण दिंडी उपस्थिती प्रोग्रेस ट्रॅकर</h2>
+        <h2>Overall Progress tracker</h2>
         <div class="progress-container"><div id="overall-progress" class="progress-bar"></div></div>
-        <p id="progress-percentage-text" style="font-weight: bold;">0% आरूढ</p>
+        <p id="progress-percentage-text" style="font-weight: bold;">0% Checked In</p>
     </div>
 </div>
 
+<!-- ================= 4. PRINT-READY ID CARD STUDIO ================= -->
 <div id="idcard-view" class="view-panel">
     <div class="card">
-        <h2>स्मार्ट डिजिटल ओळखपत्र जनरेटर (Print Ready Studio)</h2>
-        <p>भक्ताचा क्यूआर आयडी नंबर टाका, प्रिंटिंगसाठी हुबेहूब डिझाईनचे कार्ड तयार होईल.</p>
+        <h2>Smart Digital ID Studio Layout</h2>
+        <p>Input the unique QR ID to generate a pixel-matched matching printable layout structure.</p>
         <div class="form-group" style="display: flex; gap: 10px;">
-            <input type="number" id="search-card-id" placeholder="क्यूआर आयडी प्रविष्ट करा (उदा. 1001)">
-            <button class="btn" style="width: 160px;" onclick="generateIDCardPreview()">आयडी कार्ड बनवा</button>
+            <input type="number" id="search-card-id" placeholder="Enter QR ID (e.g. 1001)">
+            <button class="btn" style="width: 160px;" onclick="generateIDCardPreview()">Generate Card</button>
         </div>
 
         <div class="id-card-print" id="print-area" style="display: none;">
             
+            <!-- CARD FRONT -->
             <div class="id-side">
                 <div class="id-front-bg">
                     <div style="font-size: 11px; font-weight: bold; color: #555; letter-spacing: 1px;">स्थापना १९८५ | वर्ष ४२ वे</div>
@@ -183,11 +190,12 @@
                         <tr><td class="field-title">रक्त गट</td><td>: <span id="id-lbl-blood" style="font-weight:bold; color:#cc3300;">-</span></td></tr>
                     </table>
                     
-                    <div class="id-date-badge">२३ जानेवारी ते ३० जानेवारी २०२७</div>
+                    <div class="id-date-badge">२३ जानेवारी ते ३० जानेवारी २०२६</div>
                     <div class="id-quote-footer">|| जन्मास यावे परी एकदा तरी शिर्डीस चालत जावे आणि जीवन व्यसनमुक्त असावे ||</div>
                 </div>
             </div>
 
+            <!-- CARD BACK -->
             <div class="id-side">
                 <div class="id-back-bg">
                     <div class="id-back-header">वैयक्तिक डिजिटल सुरक्षा कोड</div>
@@ -203,12 +211,11 @@
 </div>
 
 <script>
-    // Replace with your live Google Sheets Web App URL endpoint link
-    const BACKEND_API_URL = "YOUR_DEPLOYED_WEB_APP_URL_HERE"; 
+    // ** AUTOMATICALLY LINKED TO LIVE GOOGLE SCRIPT BACKEND WEB APP **
+    const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbxMjXeteIyjgm8FtZC1QDXAyqNnR-O5gWWypHCZeorNCjzlGxkFrO-DenHqDSuPD20/exec"; 
     let html5QrcodeScanner = null;
     let currentUserRole = null;
 
-    // --- 0. सुरक्षित लॉगिन नियंत्रण (Authentication Routine) ---
     function handleLogin() {
         const role = document.getElementById('login-role').value;
         const pin = document.getElementById('login-pass').value;
@@ -226,7 +233,7 @@
                 switchView('dashboard-view', document.getElementById('nav-dash'));
             }
         } else {
-            alert("चुकीचा सिक्युरिटी पिन! कृपया पुन्हा प्रयत्न करा.");
+            alert("Invalid Security Code PIN! Try again.");
         }
     }
 
@@ -248,7 +255,6 @@
         }, 300);
     }
 
-    // --- १. स्कॅनर गन मॅनेजमेंट (Hardware Gun Keypress Engine) ---
     function handleGunScan(event) {
         if (event.key === 'Enter') { 
             const scannedId = document.getElementById('gun-barcode-catcher').value.trim();
@@ -259,7 +265,6 @@
         }
     }
 
-    // --- २. कॅमेरा ट्रॅकिंग मॅनेजमेंट (Camera Controller) ---
     function startCameraScanner() {
         html5QrcodeScanner = new Html5QrcodeScanner("scanner-reader", { fps: 10, qrbox: 250 });
         html5QrcodeScanner.render((text) => {
@@ -275,7 +280,7 @@
         feedback.style.display = "block";
         feedback.style.backgroundColor = "#ff9933";
         feedback.style.color = "white";
-        feedback.innerText = `प्रक्रिया सुरू आहे... आयडी: ${cardId}`;
+        feedback.innerText = `Processing... Tracking ID: ${cardId}`;
 
         try {
             const response = await fetch(BACKEND_API_URL, {
@@ -285,16 +290,15 @@
             const data = await response.json();
             if(data.status === "success") {
                 feedback.style.backgroundColor = "var(--success)";
-                feedback.innerText = `हजेरी नोंदवली! कार्ड नंबर #${cardId} सुरक्षित जतन झाला.`;
+                feedback.innerText = `Attendance Tracked Successfully for ID #${cardId}`;
             }
         } catch (error) {
             feedback.style.backgroundColor = "#c0392b";
-            feedback.innerText = "कनेक्शन ड्रॉप! डेटा स्थानिक पातळीवर नोंदवला.";
+            feedback.innerText = "Connection lost! Checking server routes failed.";
         }
         focusGunInput();
     }
 
-    // --- ३. नवीन भक्त नोंदणी (Register Request Wrapper) ---
     async function handleRegistration(event) {
         event.preventDefault();
         const payload = {
@@ -310,13 +314,12 @@
             const response = await fetch(BACKEND_API_URL, { method: 'POST', body: JSON.stringify(payload) });
             const data = await response.json();
             if(data.status === "success") {
-                alert(`यशस्वी नोंदणी: साईभक्त ${payload.name} सुरक्षित जोडले गेले!`);
+                alert(`Success! Devotee ${payload.name} added safely.`);
                 document.getElementById('registrationForm').reset();
             }
-        } catch (e) { alert("सर्व्हर एरर! डेटा ट्रान्सफर अपूर्ण."); }
+        } catch (e) { alert("Server connection failed. Could not write data."); }
     }
 
-    // --- ४. डॅशबोर्ड डेटा एग्रीगेशन (Admin Pull Engine) ---
     async function fetchDashboardData() {
         const filterLoc = document.getElementById('dash-location-filter').value;
         try {
@@ -327,18 +330,17 @@
             
             const pct = Math.round((data.scanned_count / data.registered_count) * 100) || 0;
             document.getElementById('overall-progress').style.width = `${pct}%`;
-            document.getElementById('progress-percentage-text').innerText = `${pct}% पूर्ण (${data.scanned_count} / ${data.registered_count} हजर)`;
+            document.getElementById('progress-percentage-text').innerText = `${pct}% Arrived (${data.scanned_count} / ${data.registered_count})`;
         } catch (e) {}
     }
 
-    // --- ५. प्रिंट-रेडी आयडी कार्ड रेंडरिंग ---
     async function generateIDCardPreview() {
         const searchId = document.getElementById('search-card-id').value;
         if(!searchId) return;
         try {
             const response = await fetch(`${BACKEND_API_URL}?search_id=${searchId}`);
             const bhakt = await response.json();
-            if(bhakt.status === "error") { alert("या क्रमांकाचा साईभक्त सिस्टीममध्ये नाही!"); return; }
+            if(bhakt.status === "error") { alert("Devotee ID not found in database registry!"); return; }
             
             document.getElementById('id-lbl-name').innerText = bhakt.name;
             document.getElementById('id-lbl-phone').innerText = bhakt.phone;
@@ -346,11 +348,10 @@
             document.getElementById('id-lbl-blood').innerText = bhakt.blood;
             document.getElementById('id-lbl-footer-name').innerText = bhakt.name;
             
-            // Dynamic QR Generation Module Trigger
             document.getElementById('qrcode-canvas').innerHTML = "";
             new QRCode(document.getElementById('qrcode-canvas'), { text: searchId, width: 150, height: 150 });
             document.getElementById('print-area').style.display = "flex";
-        } catch (e) { alert("डेटाबेस कनेक्शन फेल."); }
+        } catch (e) { alert("Database entry handshake failed."); }
     }
 </script>
 </body>
